@@ -19,6 +19,10 @@ class App extends Component {
     // this.search('Homer thinking')
   }
 
+  setSelected = (gifId) => {
+    this.setState({ selectedGifId: gifId })
+  }
+
   search = (query) => {
     giphy(`${KEY}`).search(query).then((res) => {
       // Res contains gif data!
@@ -33,14 +37,14 @@ class App extends Component {
   }
   render() {
     return (<div>
-      <div className="left-scene">
-        <SearchBar search={this.search}/>
-        <div className="selected-gif">
+      <div className='left-scene'>
+        <SearchBar search={this.search} />
+        <div className='selected-gif'>
           <Gif id={this.state.selectedGifId} />
         </div>
       </div>
-      <div className="right-scene">
-        <GifList gifs={this.state.gifs} />
+      <div className='right-scene'>
+        <GifList gifs={this.state.gifs} mouse={this.setSelected} />
       </div>
     </div>)
   }
